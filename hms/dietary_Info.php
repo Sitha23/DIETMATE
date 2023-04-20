@@ -1,20 +1,24 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(E_ALL);
 include('include/config.php');
 include('include/checklogin.php');
 check_login();
 
 if(isset($_POST['submit']))
 {
-$specilization=$_POST['Doctorspecialization'];
-$doctorid=$_POST['doctor'];
 $userid=$_SESSION['id'];
-$fees=$_POST['fees'];
-$appdate=$_POST['appdate'];
-$time=$_POST['apptime'];
-$userstatus=1;
-$docstatus=1;
+$name=$_POST['name'];
+$age=$_POST['age'];
+$gender=$_POST['gender'];
+$height=$_POST['height'];
+$weight=$_POST['weight'];
+$bmi=$_POST['bmi'];
+$activitylevel=$_POST['activitylevel'];
+$dietarypatterns=$_POST['dietarypatterns'];
+$calories=$_POST['calories'];
+$history=$_POST['history'];
+$medication=$_POST['medication'];
 $query=mysqli_query($con,"insert into appointment(doctorSpecialization,doctorId,userId,consultancyFees,appointmentDate,appointmentTime,userStatus,doctorStatus) values('$specilization','$doctorid','$userid','$fees','$appdate','$time','$userstatus','$docstatus')");
 	if($query)
 	{
@@ -122,66 +126,85 @@ function getfee(val) {
 															 Name
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Name" required>
+								<input type="text" class="form-control" name="name" placeholder="Name" required>
 							</div>
 							
 							<label for="DoctorSpecialization">
 															 Age
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Age" required>
+								<input type="number" id="age" oninput="calculate()" class="form-control" name="age" placeholder="Age" required>
+							</div>
+							<label for="DoctorSpecialization">
+															 Gender
+															</label>
+															<div class="form-group">
+								<select id="gender" oninput="calculate()" class="form-control" name="gender" placeholder="gender" required>
+								<option value="male">Male</option>
+  <option value="female">Female</option>
+</select>
 							</div>
 
 							<label for="DoctorSpecialization">
-															 Height
+															 Height <small><i>(in Centimenters)</i></small>
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Height" required>
+								<input type="number" id="height" oninput="calculate()" class="form-control" name="height" placeholder="Height" required>
 							</div>
 
 							<label for="DoctorSpecialization">
-															 Weight
+															 Weight <small><i>(in Kilograms)</i></small>
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Weight" required>
+								<input type="number" id="weight" oninput="calculate()" class="form-control" name="weight" placeholder="Weight" required>
 							</div>
 
 							<label for="DoctorSpecialization">
 															 BMI
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="BMI" required>
+								<input type="text" class="form-control" name="bmi" id="bmi" placeholder="BMI" required>
+							</div>
+							<label for="DoctorSpecialization">
+															 Activity Level
+															</label>
+															<div class="form-group">
+								<select id="activity-level" oninput="calculate()" class="form-control" name="activitylevel" placeholder="Activity Level" required>
+								<option value="sedentary">Sedentary (little or no exercise)</option>
+  <option value="lightly-active">Lightly Active (light exercise or sports 1-3 days a week)</option>
+  <option value="moderately-active">Moderately Active (moderate exercise or sports 3-5 days a week)</option>
+  <option value="very-active">Very Active (hard exercise or sports 6-7 days a week)</option>
+  <option value="extra-active">Extra Active (very hard exercise or sports, physical job or training twice a day)</option>
+</select>
+							</div>
+							<label for="DoctorSpecialization">
+															 Dietary Patterns
+															</label>
+															<div class="form-group">
+								<select id="Dietary Patterns"  class="form-control" name="dietarypatterns" placeholder="Dietary Patterns" required>
+								<option value="Vegan">Vegan</option>
+  <option value="Non-Vegetarian">Non-Vegetarian</option>
+  <option value="Vegetarian">Vegetarian</option>
+</select>
 							</div>
 
 							<label for="DoctorSpecialization">
 															 Calorie Intake
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Calorie Intake" required>
-							</div>
-							<label for="DoctorSpecialization">
-															 Activity Level
-															</label>
-															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Activity Level" required>
-							</div>
-							<label for="DoctorSpecialization">
-															 Dietary Patterns
-															</label>
-															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Dietary Patterns" required>
+								<input type="text" class="form-control" id="calories" name="calories" placeholder="Calorie Intake" required>
 							</div>
 							<label for="DoctorSpecialization">
 															 User health history
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="User health history" required>
+								<input type="text" class="form-control" name="history" placeholder="User health history" required>
 							</div>
 							<label for="DoctorSpecialization">
 															 Type of medication
 															</label>
 															<div class="form-group">
-								<input type="text" class="form-control" name="full_name" placeholder="Type of Medication" required>
+								<input type="text" class="form-control" name="medication" placeholder="Type of Medication" required>
 							</div>
 
 
@@ -210,6 +233,7 @@ function getfee(val) {
 						
 					</div>
 				</div>
+			</div>
 			</div>
 			<!-- start: FOOTER -->
 	<?php include('include/footer.php');?>
@@ -256,6 +280,44 @@ function getfee(val) {
 		  <script type="text/javascript">
             $('#timepicker1').timepicker();
         </script>
+		<script>
+		function calculate() {
+  var weight = document.getElementById("weight").value;
+  var height = document.getElementById("height").value;
+  var age = document.getElementById("age").value;
+  var gender = document.getElementById("gender").value;
+  var activityLevel = document.getElementById("activity-level").value;
+  
+  if (weight > 0 && height > 0 && age > 0) {
+    var bmr;
+    
+    if (gender == "male") {
+      bmr = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
+    } else if (gender == "female") {
+      bmr = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+    }
+    
+    var calories;
+    
+    if (activityLevel == "sedentary") {
+      calories = bmr * 1.2;
+    } else if (activityLevel == "lightly-active") {
+      calories = bmr * 1.375;
+    } else if (activityLevel == "moderately-active") {
+      calories = bmr * 1.55;
+    } else if (activityLevel == "very-active") {
+      calories = bmr * 1.725;
+    } else if (activityLevel == "extra-active") {
+      calories = bmr * 1.9;
+    }
+    
+    var bmi = weight / ((height/100) * (height/100));
+    
+    document.getElementById("calories").value = calories.toFixed(0);
+    document.getElementById("bmi").value = bmi.toFixed(2);
+  }
+}
+		</script>
 		<!-- end: JavaScript Event Handlers for this page -->
 		<!-- end: CLIP-TWO JAVASCRIPTS -->
 
