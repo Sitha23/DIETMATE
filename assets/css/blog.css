@@ -1,0 +1,87 @@
+body{
+    background-image:\xampp\htdocs\hospital\assets\images\bg.jpg;
+	
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 90px;
+    background-color: black;
+    color: white;
+}
+
+nav ul li{
+    padding: 0 15px;
+    list-style: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+nav ul li a:hover{
+    border-bottom: 3px solid #fff;
+    background-color: rgba(255, 51, 153, 0.527);
+}
+.brand img{
+    height: 95px;
+    padding: 0 8px;
+}
+
+.content{
+    padding: 20px;
+    margin-top: 10px;
+}
+.heading{
+    padding: 30px;
+    position: relative;
+    top: 42%;
+    text-align: center;
+    color: white;
+    border: 5px white solid;
+    background-color: rgba(0, 0, 0, 0.651);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 50px;
+}
+
+.content p{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.photos p{
+    text-align: center;
+}
+
+.photos h3{
+    text-align: center;
+}
+
+.photos p img{
+    text-align: center;
+    height: 500px;
+}
+
+.content ul li{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.content h2{
+    margin-top: 20px;
+}
+
+.content marquee{
+    background-color: white;
+}
