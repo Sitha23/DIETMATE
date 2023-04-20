@@ -27,15 +27,13 @@ echo "<script>window.location.href ='index.php'</script>";
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/blog.css" />
 </head>
-
 <style>
-        body {
-            background-image: url("bg.jpg");
-            
-            background-size: cover;
-        
-        }
-    </style>
+    .body{
+        background-image: url("assets/blog/bg.jpg");
+        background-size: cover;
+    }
+</style>
+
     <!-- ################# Header Starts Here#######################--->
     
       <header id="menu-jk">
@@ -77,9 +75,9 @@ echo "<script>window.location.href ='index.php'</script>";
         <p>Insulin is a hormone that regulates blood glucose levels and their absorption into the body cells. The beta cells of the pancreas produce insulin.</p>
         <p>So, when the body becomes Insulin resistant or when there is insulin deficiency it results in diabetes.</p>
         <div class="photos">
-            <p><img src="diabetes.jpg"></p>
+        <p><img src="assets/blog/diabetes.jpg"></p>
             <h3>There are two types of Diabetes: </h3>
-            <p><img src="typess.jpg" ><img src="types.jpg"></p>
+            <p><img src="assets/blog/typess.jpg" ><img src="assets/blog/types.jpg"></p>
         </div>
         <h2>KEY FACTS</h2>
         <ul>
